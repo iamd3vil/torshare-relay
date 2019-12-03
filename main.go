@@ -19,6 +19,7 @@ func main() {
 
 	router := fasthttprouter.New()
 	router.POST("/v1/relay", hub.newChannel)
+	router.GET("/v1/relay", hub.sendChannelMeta)
 
 	log.Fatal(fasthttp.ListenAndServe(cfg.App.Addr, router.Handler))
 }

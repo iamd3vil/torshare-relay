@@ -54,3 +54,19 @@ func (h *Hub) newChannel(ctx *fasthttp.RequestCtx) {
 		"channel": channel,
 	})
 }
+
+func (h *Hub) sendChannelMeta(ctx *fasthttp.RequestCtx) {
+	channel := ctx.QueryArgs().Peek("channel")
+	if len(channel) == 0 {
+		SendErrorResp(ctx, fasthttp.StatusBadRequest, "channel name can't be empty")
+		return
+	}
+
+	res, err := h.rClient.Get(string(channel)).Bytes()
+	if err != nil {
+		SendErrorResp(ctx, fasthttp.StatusBadRequest, "invalid channel name")
+		return
+	}
+
+	ctx.Write(res)
+}
