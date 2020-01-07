@@ -1,3 +1,4 @@
 config.toml
 torshare-relay
 dist/
+data/

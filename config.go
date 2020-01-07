@@ -13,7 +13,7 @@ type cfgRedis struct {
 }
 
 type cfgApp struct {
-	Addr string `koanf:"addr"`
+	PrivateKeyPath string `koanf:"private_key_path"`
 }
 
 type Config struct {
